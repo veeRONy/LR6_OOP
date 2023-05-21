@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.chbCTRL = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -41,6 +42,13 @@
             this.btnBlue = new System.Windows.Forms.ToolStripButton();
             this.btnPink = new System.Windows.Forms.ToolStripButton();
             this.btnYellow = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnGroup = new System.Windows.Forms.ToolStripButton();
+            this.btnUnGroup = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnLoad = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,11 +57,11 @@
             this.chbCTRL.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.chbCTRL.AutoSize = true;
             this.chbCTRL.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chbCTRL.Location = new System.Drawing.Point(0, 419);
-            this.chbCTRL.Margin = new System.Windows.Forms.Padding(2);
+            this.chbCTRL.Location = new System.Drawing.Point(0, 518);
+            this.chbCTRL.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chbCTRL.Name = "chbCTRL";
-            this.chbCTRL.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.chbCTRL.Size = new System.Drawing.Size(69, 21);
+            this.chbCTRL.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.chbCTRL.Size = new System.Drawing.Size(83, 24);
             this.chbCTRL.TabIndex = 0;
             this.chbCTRL.Text = "CTRL";
             this.chbCTRL.UseVisualStyleBackColor = true;
@@ -63,11 +71,11 @@
             this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox2.Location = new System.Drawing.Point(0, 398);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox2.Location = new System.Drawing.Point(0, 492);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.checkBox2.Size = new System.Drawing.Size(384, 21);
+            this.checkBox2.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.checkBox2.Size = new System.Drawing.Size(488, 24);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "Выделение только одного объекта при пересечении";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -85,10 +93,17 @@
             this.btnGreen,
             this.btnBlue,
             this.btnPink,
-            this.btnYellow});
+            this.btnYellow,
+            this.toolStripSeparator2,
+            this.btnGroup,
+            this.btnUnGroup,
+            this.toolStripSeparator4,
+            this.btnSave,
+            this.btnLoad,
+            this.toolStripSeparator6});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(689, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(919, 39);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -102,6 +117,7 @@
             this.btnCircle.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCircle.Name = "btnCircle";
             this.btnCircle.Size = new System.Drawing.Size(36, 36);
+            this.btnCircle.Text = "Круг";
             this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
             // 
             // btnRectangle
@@ -113,6 +129,7 @@
             this.btnRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRectangle.Name = "btnRectangle";
             this.btnRectangle.Size = new System.Drawing.Size(36, 36);
+            this.btnRectangle.Text = "Квадрат";
             this.btnRectangle.Click += new System.EventHandler(this.btnRectangle_Click);
             // 
             // btnTriangle
@@ -124,6 +141,7 @@
             this.btnTriangle.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTriangle.Name = "btnTriangle";
             this.btnTriangle.Size = new System.Drawing.Size(36, 36);
+            this.btnTriangle.Text = "Треугольник";
             this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
             // 
             // toolStripSeparator1
@@ -145,6 +163,7 @@
             this.btnRed.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRed.Name = "btnRed";
             this.btnRed.Size = new System.Drawing.Size(36, 36);
+            this.btnRed.Text = "Красный";
             this.btnRed.Click += new System.EventHandler(this.btnRed_Click);
             // 
             // btnGreen
@@ -155,7 +174,7 @@
             this.btnGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGreen.Name = "btnGreen";
             this.btnGreen.Size = new System.Drawing.Size(36, 36);
-            this.btnGreen.Text = "toolStripButton5";
+            this.btnGreen.Text = "Зеленый";
             this.btnGreen.Click += new System.EventHandler(this.btnGreen_Click);
             // 
             // btnBlue
@@ -166,7 +185,7 @@
             this.btnBlue.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnBlue.Name = "btnBlue";
             this.btnBlue.Size = new System.Drawing.Size(36, 36);
-            this.btnBlue.Text = "toolStripButton6";
+            this.btnBlue.Text = "Синий";
             this.btnBlue.Click += new System.EventHandler(this.btnBlue_Click);
             // 
             // btnPink
@@ -177,7 +196,7 @@
             this.btnPink.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPink.Name = "btnPink";
             this.btnPink.Size = new System.Drawing.Size(36, 36);
-            this.btnPink.Text = "toolStripButton7";
+            this.btnPink.Text = "Розовый";
             this.btnPink.Click += new System.EventHandler(this.btnPink_Click);
             // 
             // btnYellow
@@ -188,20 +207,79 @@
             this.btnYellow.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnYellow.Name = "btnYellow";
             this.btnYellow.Size = new System.Drawing.Size(36, 36);
-            this.btnYellow.Text = "toolStripButton8";
+            this.btnYellow.Text = "Желтый";
             this.btnYellow.Click += new System.EventHandler(this.btnYellow_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
+            // 
+            // btnGroup
+            // 
+            this.btnGroup.BackColor = System.Drawing.Color.Pink;
+            this.btnGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnGroup.Image = ((System.Drawing.Image)(resources.GetObject("btnGroup.Image")));
+            this.btnGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGroup.Name = "btnGroup";
+            this.btnGroup.Size = new System.Drawing.Size(119, 36);
+            this.btnGroup.Text = "Сгруппировать";
+            this.btnGroup.Click += new System.EventHandler(this.btnGroup_Click);
+            // 
+            // btnUnGroup
+            // 
+            this.btnUnGroup.BackColor = System.Drawing.Color.Pink;
+            this.btnUnGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnUnGroup.Image = ((System.Drawing.Image)(resources.GetObject("btnUnGroup.Image")));
+            this.btnUnGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnUnGroup.Name = "btnUnGroup";
+            this.btnUnGroup.Size = new System.Drawing.Size(133, 36);
+            this.btnUnGroup.Text = "Разгруппировать";
+            this.btnUnGroup.Click += new System.EventHandler(this.btnUnGroup_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(87, 36);
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnLoad.Image = ((System.Drawing.Image)(resources.GetObject("btnLoad.Image")));
+            this.btnLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(81, 36);
+            this.btnLoad.Text = "Загрузить";
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 39);
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 440);
+            this.ClientSize = new System.Drawing.Size(919, 542);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.chbCTRL);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmMain";
             this.Text = "Визуальный редактор";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmMain_Paint);
@@ -230,6 +308,13 @@
         private System.Windows.Forms.ToolStripButton btnBlue;
         private System.Windows.Forms.ToolStripButton btnPink;
         private System.Windows.Forms.ToolStripButton btnYellow;
+        private System.Windows.Forms.ToolStripButton btnGroup;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton btnUnGroup;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton btnSave;
+        private System.Windows.Forms.ToolStripButton btnLoad;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }
 

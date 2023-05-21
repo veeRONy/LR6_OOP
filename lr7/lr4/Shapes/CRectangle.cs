@@ -3,6 +3,7 @@ using lr4.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,17 @@ namespace lr4
                 a += da;
             else if (da < 0)
                 a += da;
+        }
+        public override void Save(string filename)
+        {
+            string inf = "R " + x.ToString()
+                           + " " + y.ToString() + " " + a.ToString()
+                           + " " + ColorCode();
+            using (StreamWriter writer = new StreamWriter(filename, true))
+            {
+                writer.WriteLine(inf);
+            }
+
         }
     }
 }

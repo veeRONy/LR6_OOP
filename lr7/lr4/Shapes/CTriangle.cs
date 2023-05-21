@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,5 +108,17 @@ namespace lr4.Shapes
         {
             return this;
         }
+        public override void Save(string filename)
+        {
+            string inf = "T " + x.ToString()
+                           + " " + y.ToString() + " " + a.ToString()
+                           + " " + ColorCode();
+            using (StreamWriter writer = new StreamWriter(filename,true))
+            {
+                writer.WriteLine(inf);
+            }
+
+        }
+       
     }
 }

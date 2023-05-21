@@ -23,6 +23,10 @@ namespace lr4
             x = shape.x;
             y = shape.y;
         }
+        public override bool IsDecorated()
+        {
+            return true;
+        }
 
         override public void Draw(frmMain form)
         {
@@ -54,6 +58,11 @@ namespace lr4
         public override bool IsClicked(int X, int Y)
         {
             return shape.IsClicked(X, Y);
+        }
+
+        public override void Save(string filename)
+        {
+            shape.Save(filename);
         }
     }
 }
