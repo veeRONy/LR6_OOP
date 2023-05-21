@@ -1,0 +1,11 @@
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\obj\Debug\lr6.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\obj\Debug\lr6.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\obj\Debug\lr6.frmMain.resources
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\obj\Debug\lr4.Properties.Resources.resources
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\obj\Debug\lr6.csproj.GenerateResource.cache
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\obj\Debug\lr6.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\obj\Debug\lr4.exe
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\obj\Debug\lr4.pdb
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\bin\Debug\lr4.exe.config
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\bin\Debug\lr4.exe
+C:\Users\user\Desktop\Учеба\с# проги\lr6\lr4\bin\Debug\lr4.pdb
