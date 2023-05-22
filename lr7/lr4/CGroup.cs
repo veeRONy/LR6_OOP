@@ -1,4 +1,5 @@
-﻿using lr4.Shapes;
+﻿using lr4.Observer;
+using lr4.Shapes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,9 +13,10 @@ namespace lr4
     {
         List<CShape> _shapes;
 
-        public CGroup()
+        public CGroup(IObserver observer)
         {
             _shapes = new List<CShape>();
+            AddObserver(observer);
         }
         public void AddShape(CShape shape)
         {
@@ -31,6 +33,10 @@ namespace lr4
         public int GetCount()
         {
             return _shapes.Count();
+        }
+        override public CShape GetOriginal()
+        {
+            return this;
         }
 
         public override bool IsDecorated()
@@ -60,17 +66,17 @@ namespace lr4
                 shape.Draw(form);
             }
         }
-        public void Decorate()
+        public void Decorate(IObserver observer)
         {
             for (int i=0; i<_shapes.Count; i++)
             {
                 if (_shapes[i] is CGroup group)
                 {
-                    group.Decorate();
+                    group.Decorate(observer);
                 }
                 else
                 {
-                    CDecorator decorator = new CDecorator(_shapes[i]);
+                    CDecorator decorator = new CDecorator(_shapes[i], observer);
                     _shapes[i] = decorator;
                 }
             }
@@ -88,10 +94,7 @@ namespace lr4
             }
         }
 
-        public override CShape GetOriginal()
-        {
-            return null;
-        }
+       
 
         public override bool IsClicked(int X, int Y)
         {

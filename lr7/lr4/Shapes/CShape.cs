@@ -1,4 +1,5 @@
-﻿using System;
+﻿using lr4.Observer;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -13,6 +14,7 @@ namespace lr4.Shapes
         public int x, y, a;
         public Graphics g;
         public Pen pen;
+        List<IObserver> observers=new List<IObserver>();
 
         abstract public void Draw(frmMain form);
         abstract public bool IsClicked(int X, int Y);
@@ -51,6 +53,16 @@ namespace lr4.Shapes
         public bool canSizeUp(int da, int width, int height)
         {
             return (canMoveX(da, width, height) && canMoveY(da, width, height));
+        }
+
+        public void AddObserver(IObserver observer)
+        {
+            observers.Add(observer);
+        }
+        public void NotifyEveryone()
+        {
+            foreach(var observer in observers)
+                observer.OnSubjectChanged();
         }
 
     }

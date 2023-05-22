@@ -49,15 +49,17 @@
             this.btnUnGroup = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnLoad = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.treeView = new System.Windows.Forms.TreeView();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chbCTRL
             // 
-            this.chbCTRL.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.chbCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chbCTRL.AutoSize = true;
             this.chbCTRL.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chbCTRL.Location = new System.Drawing.Point(0, 518);
+            this.chbCTRL.Location = new System.Drawing.Point(33, 518);
             this.chbCTRL.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chbCTRL.Name = "chbCTRL";
             this.chbCTRL.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
@@ -68,10 +70,10 @@
             // 
             // checkBox2
             // 
-            this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.checkBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox2.Location = new System.Drawing.Point(0, 492);
+            this.checkBox2.Location = new System.Drawing.Point(33, 492);
             this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
@@ -100,10 +102,11 @@
             this.toolStripSeparator4,
             this.btnSave,
             this.btnLoad,
-            this.toolStripSeparator6});
+            this.toolStripSeparator6,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(919, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(984, 39);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -271,11 +274,34 @@
             this.btnLoad.Text = "Загрузить";
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.AutoSize = false;
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::lr4.Properties.Resources.right_arrow;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton1.Text = "Стрелка";
+            // 
+            // treeView
+            // 
+            this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.treeView.CheckBoxes = true;
+            this.treeView.HideSelection = false;
+            this.treeView.Location = new System.Drawing.Point(717, 72);
+            this.treeView.Name = "treeView";
+            this.treeView.Size = new System.Drawing.Size(255, 444);
+            this.treeView.TabIndex = 6;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(919, 542);
+            this.ClientSize = new System.Drawing.Size(984, 542);
+            this.Controls.Add(this.treeView);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.chbCTRL);
@@ -317,6 +343,8 @@
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripButton btnLoad;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.TreeView treeView;
     }
 }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using lr4.Observer;
 using lr4.Shapes;
 
 namespace lr4
@@ -12,10 +13,12 @@ namespace lr4
     public class CShapeArray
     {
         public MyStorage<CShape> shapes;
+        public IObserver observer;
 
-        public CShapeArray(MyStorage<CShape> shapes)
+        public CShapeArray(MyStorage<CShape> shapes, IObserver observer)
         {
             this.shapes = shapes;
+            this.observer = observer;
         }
 
         virtual public CShape CreateShape(string code, StreamReader reader) { return null; }
@@ -48,7 +51,7 @@ namespace lr4
 
         public CGroup LoadGroup(string code, StreamReader reader, int i)
         {
-            CGroup group = new CGroup();
+            CGroup group = new CGroup(observer);
             string[] words = code.Split(' ');
             int n = int.Parse(words[1]);
             i += n;

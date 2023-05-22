@@ -1,4 +1,5 @@
 ﻿using lr4;
+using lr4.Observer;
 using lr4.Shapes;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,13 @@ namespace lr4
 {
     public class CCircle : CShape
     {
-        public CCircle(int x, int y, Color color)
+        public CCircle(int x, int y, Color color, IObserver observer)
         {
             a = 90;
             this.x = x;
             this.y = y;            
             pen = new Pen(color);
+            AddObserver(observer);
         }
 
         override public void Draw(frmMain form)

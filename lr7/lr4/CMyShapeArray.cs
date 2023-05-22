@@ -1,4 +1,5 @@
-﻿using lr4.Shapes;
+﻿using lr4.Observer;
+using lr4.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,9 +13,9 @@ namespace lr4
     public class CMyShapeArray: CShapeArray
     {
         
-        public CMyShapeArray(MyStorage<CShape> shapes) : base(shapes)
+        public CMyShapeArray(MyStorage<CShape> shapes, IObserver observer) : base(shapes, observer)
         {
-            this.shapes = shapes;
+
         }
 
         public override CShape CreateShape(string code, StreamReader reader)
@@ -51,16 +52,16 @@ namespace lr4
             switch (type_of_shape)
             {
                 case 'C':
-                    shape = new CCircle(x,y,color);
+                    shape = new CCircle(x,y,color, observer);
                     break;
                 case 'T':
-                    shape = new CTriangle(x, y, color);
+                    shape = new CTriangle(x, y, color, observer);
                     break;
                 case 'R':
-                    shape = new CRectangle(x, y, color);
+                    shape = new CRectangle(x, y, color, observer);
                     break;
                 default:
-                    shape = new CCircle(x, y, color);
+                    shape = new CCircle(x, y, color, observer);
                     break;
             }
             shape.SetA(a);

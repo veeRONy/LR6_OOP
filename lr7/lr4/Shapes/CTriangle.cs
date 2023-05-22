@@ -1,4 +1,5 @@
 ﻿using lr4;
+using lr4.Observer;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
 
 namespace lr4.Shapes
 {
@@ -14,7 +15,7 @@ namespace lr4.Shapes
     {
         private Point[] points = new Point[3];
 
-        public CTriangle(int x, int y,Color color)
+        public CTriangle(int x, int y,Color color, IObserver observer)
         { 
             this.x = x;
             this.y = y;
@@ -30,6 +31,7 @@ namespace lr4.Shapes
             points[2].Y = y - Convert.ToInt32(a * Math.Sqrt(3) / 3);
 
             pen = new Pen(color);
+            AddObserver(observer);
 
         }
         override public void Draw(frmMain form)

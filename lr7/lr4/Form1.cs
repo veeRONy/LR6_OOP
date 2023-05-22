@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using lr4.Observer;
 
 namespace lr4
 {
@@ -20,6 +21,7 @@ namespace lr4
         Color color;
         string currShape;
         string filename = "C:\\Users\\user\\Desktop\\Учеба\\с# проги\\lr7\\shapes.txt";
+        CObserver observer;
 
         public frmMain()
         {
@@ -27,6 +29,7 @@ namespace lr4
             currShape = "Circle";
             color = Color.Red;
             shapes = new MyStorage<CShape>();
+            observer = new CObserver(treeView, shapes);
         }
 
 
@@ -44,22 +47,21 @@ namespace lr4
                     if (shapes.getObject(i).IsDecorated())
                     {
                         shapes.erase(i);
+                        
                         --i;
                     }
+                    
                 }
                 // последнюю в списке делаем выделенной
                 if (shapes.getSize() != 0)
                 {
-                    if (shapes.last() is CGroup group)
-                    {
-                        group.Decorate();
-                    }
-                    else
-                    {
-                        CDecorator decorator = new CDecorator(shapes.last());
-                        shapes.popBack();
-                        shapes.pushBack(decorator);
-                    }
+                    DecorateLastShape();
+                }
+                else
+                {
+                    treeView.Nodes.Clear();
+                    TreeNode t = new TreeNode("Хринилище:");
+                    treeView.Nodes.Add(t);
                 }
                 Refresh();
             }
@@ -135,35 +137,26 @@ namespace lr4
                 switch(currShape)
                 {
                     case "Circle":
-                        shape = new CCircle(e.X, e.Y, color);
+                        shape = new CCircle(e.X, e.Y, color,observer);
                         break;
                     case "Triangle":
-                        shape = new CTriangle(e.X, e.Y,color);
+                        shape = new CTriangle(e.X, e.Y,color, observer);
                         break;
                     case "Rectangle":
-                        shape = new CRectangle(e.X, e.Y, color);
+                        shape = new CRectangle(e.X, e.Y, color, observer);
                         break;
                     default:
-                        shape = new CCircle(e.X, e.Y, color);
+                        shape = new CCircle(e.X, e.Y, color, observer);
                         break;
                 }
                 // создаем для нее декоратор
-                CDecorator decorator1 = new CDecorator(shape);
+                CDecorator decorator1 = new CDecorator(shape, observer);
                 // добавляем в контейнер
                 shapes.pushBack(decorator1);
+                decorator1.NotifyEveryone();
 
                 // все предыдщие фигуры делаем не декорированными, в том числе группы, если они декорированы
-                for (int i = 0; i < shapes.getSize() - 1; ++i)
-                {
-                    if (shapes.getObject(i) is CGroup group)
-                    {
-                        group.Undecorate();
-                    }
-                    else if (shapes.getObject(i) is CDecorator decorator)
-                    {
-                        shapes.setObject(i, decorator.GetOriginal());
-                    }
-                }
+                UndecorateShapes();
             }
             else // выделение
             {
@@ -173,12 +166,14 @@ namespace lr4
                     {
                         if (shapes.getObject(i) is CGroup group)
                         {
-                            group.Decorate();
+                            group.Decorate(observer);
+                            group.NotifyEveryone();
                         }
                         else
                         {
-                            CDecorator decorator = new CDecorator(shapes.getObject(i));
+                            CDecorator decorator = new CDecorator(shapes.getObject(i), observer);
                             shapes.setObject(i, decorator);
+                            shapes.getObject(i).NotifyEveryone();
                             if (checkBox2.Checked == true)
                                 break;
                         }
@@ -195,6 +190,37 @@ namespace lr4
 
         }
 
+        public void UndecorateShapes()
+        {
+            for (int i = 0; i < shapes.getSize() - 1; ++i)
+            {
+                if (shapes.getObject(i) is CGroup group)
+                {
+                    group.Undecorate();
+                    group.NotifyEveryone();
+                }
+                else if (shapes.getObject(i) is CDecorator decorator)
+                {
+                    shapes.setObject(i, decorator.GetOriginal());
+                    decorator.NotifyEveryone();
+                }
+            }
+        }
+
+        public void DecorateLastShape()
+        {
+            if (shapes.last() is CGroup group)
+            {
+                group.Decorate(observer);
+            }
+            else
+            {
+                CDecorator decorator = new CDecorator(shapes.last(), observer);
+                shapes.popBack();
+                shapes.pushBack(decorator);
+            }
+            shapes.last().NotifyEveryone();
+        }
         private void frmMain_KeyUp(object sender, KeyEventArgs e)
         {
             if (chbCTRL.Checked == true)
@@ -243,17 +269,21 @@ namespace lr4
 
         private void btnGroup_Click(object sender, EventArgs e)
         {
-            CGroup group = new CGroup();
-            for (int i = 0; i < shapes.getSize(); ++i)
+            if (shapes.getSize() != 0)
             {
-                if (shapes.getObject(i).IsDecorated())
+                CGroup group = new CGroup(observer);
+                for (int i = 0; i < shapes.getSize(); ++i)
                 {
-                    group.AddShape(shapes.getObject(i));
-                    shapes.erase(i);
-                    i--;
+                    if (shapes.getObject(i).IsDecorated())
+                    {
+                        group.AddShape(shapes.getObject(i));
+                        shapes.erase(i);
+                        i--;
+                    }
                 }
+                shapes.pushBack(group);
+                shapes.last().NotifyEveryone();
             }
-            shapes.pushBack(group);
         }
 
         private void btnUnGroup_Click(object sender, EventArgs e)
@@ -281,8 +311,12 @@ namespace lr4
                     }
                     shapes.erase(i);
                     i--;
+                    
                 }
             }
+            DecorateLastShape();
+            Refresh();
+            shapes.last().NotifyEveryone();
         }
 
 
@@ -299,7 +333,7 @@ namespace lr4
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            CMyShapeArray cMyShapeArray = new CMyShapeArray(shapes);
+            CMyShapeArray cMyShapeArray = new CMyShapeArray(shapes, observer);
             cMyShapeArray.LoadShapes(filename);
 
             // последюю делаем выделенной
@@ -307,14 +341,15 @@ namespace lr4
             {
                 if (shapes.last() is CGroup group)
                 {
-                    group.Decorate();
+                    group.Decorate(observer);
                 }
                 else
                 {
-                    CDecorator decorator = new CDecorator(shapes.last());
+                    CDecorator decorator = new CDecorator(shapes.last(), observer);
                     shapes.popBack();
                     shapes.pushBack(decorator);
                 }
+                shapes.last().NotifyEveryone();
             }
             Refresh();
         }

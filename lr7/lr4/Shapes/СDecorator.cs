@@ -1,4 +1,5 @@
 ﻿using lr4;
+using lr4.Observer;
 using lr4.Shapes;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace lr4
     {
         private CShape shape;
 
-        public CDecorator(CShape shape)
+        public CDecorator(CShape shape, IObserver observer)
         {
             this.shape = shape;
             pen = new Pen(Color.Black);
@@ -22,6 +23,7 @@ namespace lr4
             a = shape.a;
             x = shape.x;
             y = shape.y;
+            AddObserver(observer);
         }
         public override bool IsDecorated()
         {
