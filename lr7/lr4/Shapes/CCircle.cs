@@ -44,12 +44,12 @@ namespace lr4
 
         override public void MoveX(int dx, int width, int height)
         {
-            if (canMoveX(dx, width, height))
+            if (canMoveX(dx, width))
                 x += dx;
         }
         override public void MoveY(int dy, int width, int height)
         {
-            if (canMoveY(dy, width, height))
+            if (canMoveY(dy, height))
                 y += dy;
         }
         override public void ChangeSize(int da, int width, int height)

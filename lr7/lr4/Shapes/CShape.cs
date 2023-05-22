@@ -42,17 +42,17 @@ namespace lr4.Shapes
         {
             this.a = a;
         }
-        public bool canMoveX(int dx, int width, int height)
+        public bool canMoveX(int dx, int width)
         {
-            return ((x + dx - 10 - a/2) > 0 && (x + dx + 25 + a/2) < width);
+            return ((x + dx - 10 - a/2) > 0 && (x + dx + 225 + a/2) < width);
         }
-        public bool canMoveY(int dy, int width, int height)
+        public bool canMoveY(int dy, int height)
         {
             return ((y + dy - 45 - a/2) > 0 && (y + dy + 50 + a/2) < height);
         }
         public bool canSizeUp(int da, int width, int height)
         {
-            return (canMoveX(da, width, height) && canMoveY(da, width, height));
+            return (canMoveX(da, width) && canMoveY(da, height));
         }
 
         public void AddObserver(IObserver observer)

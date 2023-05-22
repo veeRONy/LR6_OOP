@@ -22,6 +22,7 @@ namespace lr4
         string currShape;
         string filename = "C:\\Users\\user\\Desktop\\Учеба\\с# проги\\lr7\\shapes.txt";
         CObserver observer;
+        CObserverForTree observerForTree;
 
         public frmMain()
         {
@@ -30,6 +31,7 @@ namespace lr4
             color = Color.Red;
             shapes = new MyStorage<CShape>();
             observer = new CObserver(treeView, shapes);
+            observerForTree = new CObserverForTree(treeView, shapes,observer);
         }
 
 
@@ -352,6 +354,58 @@ namespace lr4
                 shapes.last().NotifyEveryone();
             }
             Refresh();
+        }
+
+        bool before = false;
+        private void treeView_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            if (before == false && e.Node.Checked == true)
+                observerForTree.OnSubjectChangedDecorate(e.Node);
+            else if (before == true && e.Node.Checked == false)
+                observerForTree.OnSubjectChangedUndecorate(e.Node);
+                //int index = e.Node.Index;
+                //if (before == false && e.Node.Checked == true)
+                //{
+                //    if (shapes.getObject(index) is CGroup group)
+                //    {
+                //        group.Decorate(observer);
+                //    }
+                //    else
+                //    {
+                //        CDecorator decorator = new CDecorator(shapes.getObject(index), observer);
+                //        shapes.popBack();
+                //        shapes.pushBack(decorator);
+                //    }
+                //    e.Node.Checked = true;
+                //    Refresh();
+                //}
+                //else if (before == true && e.Node.Checked == false)
+                //{
+                //    for (int i = 0; i < shapes.getSize(); ++i)
+                //    {
+                //        if (shapes.getObject(i) is CGroup group)
+                //        {
+                //            group.Undecorate();
+                //        }
+                //        else if (shapes.getObject(i) is CDecorator decorator)
+                //        {
+                //            shapes.setObject(i, decorator.GetOriginal());
+                //        }
+                //    }
+                //    shapes.last().NotifyEveryone();
+                //    DecorateLastShape();
+                //    e.Node.Checked = false;
+                //    Refresh();
+                //}
+                Refresh();
+        }
+
+        private void treeView_BeforeCheck(object sender, TreeViewCancelEventArgs e)
+        {
+            if (e.Node.Checked == true)
+                before = true;
+            else
+                before = false;
         }
     }
 

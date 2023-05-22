@@ -23,7 +23,7 @@ namespace lr4.Observer
             // вся логика с treeview
 
             treeView.Nodes.Clear();
-            TreeNode t = new TreeNode("Хринилище:");
+            TreeNode t = new TreeNode("Хранилище:");
             treeView.Nodes.Add(t);
             for (int i=0; i< shapes.getSize(); ++i)
             {               
@@ -76,7 +76,7 @@ namespace lr4.Observer
                 return "Квадрат";
             else if (shape.GetOriginal().GetType().ToString() == "lr4.Shapes.CTriangle")
                 return "Треугольник";
-            else return "Группа";
+            else return "Группа:";
         }
 
     }

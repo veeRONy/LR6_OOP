@@ -295,6 +295,8 @@
             this.treeView.Name = "treeView";
             this.treeView.Size = new System.Drawing.Size(255, 444);
             this.treeView.TabIndex = 6;
+            this.treeView.BeforeCheck += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView_BeforeCheck);
+            this.treeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterCheck);
             // 
             // frmMain
             // 

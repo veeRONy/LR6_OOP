@@ -106,7 +106,7 @@ namespace lr4
 
         public override void MoveX(int dx, int width, int height)
         {
-            if (canMoveX(dx, width, height)) 
+            if (canMoveX(dx, width)) 
             {   
                 foreach (var shape in _shapes)
                     shape.MoveX(dx, width, height);
@@ -115,37 +115,37 @@ namespace lr4
 
         public override void MoveY(int dy, int width, int height)
         {
-            if (canMoveY(dy, width, height))
+            if (canMoveY(dy, height))
             {
                 foreach (var shape in _shapes)
                    shape.MoveY(dy, width, height);               
             }
         }
 
-        new public bool canMoveX(int dx, int width, int height)
+        new public bool canMoveX(int dx, int width)
         {
             foreach (var shape in _shapes)
             {
                 if (shape is CGroup group)
                 {
-                    if (!group.canMoveX(dx, width, height))
+                    if (!group.canMoveX(dx, width))
                         return false;
                 }
-                else if (!shape.canMoveX(dx, width, height))
+                else if (!shape.canMoveX(dx, width))
                     return false;
             }
             return true;
         }
-        new public bool canMoveY(int dy, int width, int height)
+        new public bool canMoveY(int dy, int height)
         {
             foreach (var shape in _shapes)
             {
                 if (shape is CGroup group)
                 {
-                    if (!group.canMoveY(dy, width, height))
+                    if (!group.canMoveY(dy, height))
                         return false;
                 }
-                else if (!shape.canMoveY(dy, width, height))
+                else if (!shape.canMoveY(dy, height))
                     return false;
             }
             return true;

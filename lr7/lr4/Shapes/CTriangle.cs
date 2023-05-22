@@ -59,7 +59,7 @@ namespace lr4.Shapes
 
         override public void MoveX(int dx, int width, int height)
         {
-            if (canMoveX(dx, width, height))
+            if (canMoveX(dx, width))
             {
                 points[0].X += dx;
                 points[1].X += dx;
@@ -69,7 +69,7 @@ namespace lr4.Shapes
         }
         override public void MoveY(int dy, int width, int height)
         {
-            if (canMoveY(dy, width, height))
+            if (canMoveY(dy, height))
             {
                 points[0].Y += dy;
                 points[1].Y += dy;
