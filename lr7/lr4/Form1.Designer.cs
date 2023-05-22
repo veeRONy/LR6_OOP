@@ -32,9 +32,6 @@
             this.chbCTRL = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnCircle = new System.Windows.Forms.ToolStripButton();
-            this.btnRectangle = new System.Windows.Forms.ToolStripButton();
-            this.btnTriangle = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.btnRed = new System.Windows.Forms.ToolStripButton();
@@ -43,12 +40,15 @@
             this.btnPink = new System.Windows.Forms.ToolStripButton();
             this.btnYellow = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnCircle = new System.Windows.Forms.ToolStripButton();
+            this.btnRectangle = new System.Windows.Forms.ToolStripButton();
+            this.btnTriangle = new System.Windows.Forms.ToolStripButton();
             this.btnGroup = new System.Windows.Forms.ToolStripButton();
             this.btnUnGroup = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnLoad = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,43 +106,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(919, 39);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnCircle
-            // 
-            this.btnCircle.AutoSize = false;
-            this.btnCircle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnCircle.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnCircle.Image = global::lr4.Properties.Resources.circle1;
-            this.btnCircle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCircle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCircle.Name = "btnCircle";
-            this.btnCircle.Size = new System.Drawing.Size(36, 36);
-            this.btnCircle.Text = "Круг";
-            this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
-            // 
-            // btnRectangle
-            // 
-            this.btnRectangle.AutoSize = false;
-            this.btnRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRectangle.Image = global::lr4.Properties.Resources.square;
-            this.btnRectangle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRectangle.Name = "btnRectangle";
-            this.btnRectangle.Size = new System.Drawing.Size(36, 36);
-            this.btnRectangle.Text = "Квадрат";
-            this.btnRectangle.Click += new System.EventHandler(this.btnRectangle_Click);
-            // 
-            // btnTriangle
-            // 
-            this.btnTriangle.AutoSize = false;
-            this.btnTriangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTriangle.Image = global::lr4.Properties.Resources.triangle;
-            this.btnTriangle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnTriangle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTriangle.Name = "btnTriangle";
-            this.btnTriangle.Size = new System.Drawing.Size(36, 36);
-            this.btnTriangle.Text = "Треугольник";
-            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
             // 
             // toolStripSeparator1
             // 
@@ -215,6 +178,53 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 39);
+            // 
+            // btnCircle
+            // 
+            this.btnCircle.AutoSize = false;
+            this.btnCircle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnCircle.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnCircle.Image = global::lr4.Properties.Resources.circle1;
+            this.btnCircle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCircle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCircle.Name = "btnCircle";
+            this.btnCircle.Size = new System.Drawing.Size(36, 36);
+            this.btnCircle.Text = "Круг";
+            this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
+            // 
+            // btnRectangle
+            // 
+            this.btnRectangle.AutoSize = false;
+            this.btnRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRectangle.Image = global::lr4.Properties.Resources.square;
+            this.btnRectangle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRectangle.Name = "btnRectangle";
+            this.btnRectangle.Size = new System.Drawing.Size(36, 36);
+            this.btnRectangle.Text = "Квадрат";
+            this.btnRectangle.Click += new System.EventHandler(this.btnRectangle_Click);
+            // 
+            // btnTriangle
+            // 
+            this.btnTriangle.AutoSize = false;
+            this.btnTriangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTriangle.Image = global::lr4.Properties.Resources.triangle;
+            this.btnTriangle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnTriangle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTriangle.Name = "btnTriangle";
+            this.btnTriangle.Size = new System.Drawing.Size(36, 36);
+            this.btnTriangle.Text = "Треугольник";
+            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
+            // 
             // btnGroup
             // 
             this.btnGroup.BackColor = System.Drawing.Color.Pink;
@@ -237,37 +247,29 @@
             this.btnUnGroup.Text = "Разгруппировать";
             this.btnUnGroup.Click += new System.EventHandler(this.btnUnGroup_Click);
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
-            // 
             // btnSave
             // 
+            this.btnSave.AutoSize = false;
             this.btnSave.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSave.Image = global::lr4.Properties.Resources.save;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(87, 36);
+            this.btnSave.Size = new System.Drawing.Size(36, 36);
             this.btnSave.Text = "Сохранить";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnLoad
             // 
+            this.btnLoad.AutoSize = false;
             this.btnLoad.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnLoad.Image = ((System.Drawing.Image)(resources.GetObject("btnLoad.Image")));
+            this.btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLoad.Image = global::lr4.Properties.Resources.up_loading;
             this.btnLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(81, 36);
+            this.btnLoad.Size = new System.Drawing.Size(36, 36);
             this.btnLoad.Text = "Загрузить";
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 39);
             // 
             // frmMain
             // 
