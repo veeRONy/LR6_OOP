@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using lr4.Shapes;
@@ -19,14 +20,19 @@ namespace lr4.Observer
         }
 
         // shape1
-        public void OnSubjectChanged(CShape who)
+        public void OnSubjectChangedX(CShape who, int dx, int width, int height)
         {
-            //int dx = who.GetOriginal().x - shape.GetOriginal().x;
-            //int dy = who.GetOriginal().y - shape.GetOriginal().y;
-            // who - shape1
-            //shape.GetOriginal().x = who.GetOriginal().x +dx;
-           // shape.GetOriginal().y = who.GetOriginal().y +dy;
-           
+
+            //who - shape1
+            shape.MoveX(dx, width, height);
+
+        }
+        public void OnSubjectChangedY(CShape who, int dy, int width, int height)
+        {
+
+            //who - shape1
+            shape.MoveY(dy, width, height);
+
         }
     }
 }

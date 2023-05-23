@@ -114,8 +114,8 @@ namespace lr4.Shapes
             if (canMoveX(dx, width))
             {
                 shape1.MoveX(dx, width, height);
-                //obs.OnSubjectChanged(shape1);
-                shape2.MoveX(dx,width, height);
+                obs.OnSubjectChangedX(shape1, dx, width, height);
+                
             }
         }
 
@@ -124,8 +124,7 @@ namespace lr4.Shapes
             if (canMoveY(dy, height))
             {
                 shape1.MoveY(dy, width, height);
-                //obs.OnSubjectChanged(shape1);
-                shape2.MoveY(dy, width, height);
+                obs.OnSubjectChangedY(shape1, dy, width, height);
             }
         }
 
