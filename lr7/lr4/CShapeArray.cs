@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using lr4.Observer;
 using lr4.Shapes;
+using System.Drawing;
 
 namespace lr4
 {
@@ -40,7 +41,7 @@ namespace lr4
                 {
                     CGroup group = new CGroup(observer);
                     group = LoadGroup(code, reader, i);
-                    CArrow arrow = new CArrow(group.GetShape(0), group.GetShape(1), observer);
+                    CArrow arrow = new CArrow(group.GetShape(0), group.GetShape(1), observer, Color.Red);
                     shapes.pushBack(arrow);
                 }
                 else
@@ -74,7 +75,7 @@ namespace lr4
                 else if (_code[0] == 'A')
                 {
                     group = LoadGroup(code, reader, i);
-                    CArrow arrow = new CArrow(group.GetShape(0), group.GetShape(1), observer);
+                    CArrow arrow = new CArrow(group.GetShape(0), group.GetShape(1), observer, Color.Red);
                     group.AddShape(arrow);
                 }
                 else

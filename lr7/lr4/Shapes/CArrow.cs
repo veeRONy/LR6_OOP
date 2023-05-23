@@ -1,10 +1,12 @@
 ﻿using lr4.Observer;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace lr4.Shapes
 {
@@ -13,11 +15,14 @@ namespace lr4.Shapes
         CShape shape1;
         CShape shape2;
         CObserverForShape obs;
+        public Color realColor;
+        frmMain form;
 
-        public CArrow(CShape shape1, CShape shape2, IObserver observer)
+        public CArrow(CShape shape1, CShape shape2, IObserver observer, Color color)
         {
-            this.shape1 = shape1;
-            this.shape2 = shape2;
+            this.shape1 = shape1.GetOriginal();
+            this.shape2 = shape2.GetOriginal();
+            realColor = color;
             obs = new CObserverForShape(shape2);
             AddObserver(observer);
         }
@@ -30,12 +35,18 @@ namespace lr4.Shapes
         {
             return shape2.GetOriginal();
         }
-
-        public void Decorate(IObserver observer)
+        public void SetShape2(CShape shape)
         {
+            shape2 = shape;
+            shape2.GetOriginal().SetColor(Color.Black);
+        }
+        
+        public void Decorate(IObserver observer, frmMain form)
+        {
+            this.form = form;
             if(shape1 is CGroup group)
             {
-                group.Decorate(observer);
+                group.Decorate(observer,form);
             }
             else
             {
@@ -45,13 +56,17 @@ namespace lr4.Shapes
 
             if (shape2 is CGroup group2)
             {
-                group2.Decorate(observer);
+                group2.DecorateBlackColor();
             }
             else
             {
-                CDecorator decorator = new CDecorator(shape2, observer);
-                shape2 = decorator;
+                shape2.GetOriginal().SetColor(Color.Black); 
             }
+            g = form.CreateGraphics();
+            Pen pen2 = new Pen(Color.Black);
+
+            g.DrawLine(pen2, shape1.x, shape1.y, shape2.x, shape2.y);
+            
         }
         public void Undecorate()
         {
@@ -66,11 +81,11 @@ namespace lr4.Shapes
 
             if (shape2 is CGroup group2)
             {
-                group2.Undecorate();
+                group2.UndecorateRealColor(realColor);
             }
-            else if (shape2 is CDecorator decorator)
+            else
             {
-                shape2 = decorator.GetOriginal();
+                shape2.GetOriginal().SetColor(realColor);
             }
         }
         public override void ChangeSize(int da, int width, int height)
@@ -91,6 +106,13 @@ namespace lr4.Shapes
         {
             shape1.Draw(form);
             shape2.Draw(form);
+            this.form = form;
+            if (this.IsDecorated())
+            {
+                g = form.CreateGraphics();
+                Pen pen2 = new Pen(Color.Black);
+                g.DrawLine(pen2, shape1.x, shape1.y, shape2.x, shape2.y);
+            }
         }
 
         public override CShape GetOriginal()
@@ -99,7 +121,7 @@ namespace lr4.Shapes
         }
         public override bool IsDecorated()
         {
-            return shape1.IsDecorated();
+            return (shape1 is CDecorator);
         }
 
         public override bool IsClicked(int X, int Y)
@@ -119,12 +141,28 @@ namespace lr4.Shapes
             }
         }
 
+        public void MoveXShape2(int dx, int width, int height)
+        {
+            if(shape2.canMoveX(dx, width))
+            {
+                shape2.MoveX(dx, width, height);
+            }
+        }
+
         public override void MoveY(int dy, int width, int height)
         {
             if (canMoveY(dy, height))
             {
                 shape1.MoveY(dy, width, height);
                 obs.OnSubjectChangedY(shape1, dy, width, height);
+            }
+        }
+
+        public void MoveYShape2(int dx, int width, int height)
+        {
+            if (shape2.canMoveY(dx, width))
+            {
+                shape2.MoveY(dx, width, height);
             }
         }
 

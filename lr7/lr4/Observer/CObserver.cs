@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace lr4.Observer
 {
@@ -18,6 +19,7 @@ namespace lr4.Observer
             this.treeView = treeView;
             this.shapes = shapes;
         }
+        static int k = 0;
         public void OnSubjectChanged()
         {
             // вся логика с treeview
@@ -27,17 +29,18 @@ namespace lr4.Observer
             treeView.Nodes.Add(t);
             for (int i=0; i< shapes.getSize(); ++i)
             {               
-                processNode(t,shapes.getObject(i));               
+                processNode(t,shapes.getObject(i));
+
             }
             t.ExpandAll();
 
         }
         private void processNode(TreeNode tn, CShape shape)
         {
+            
             //Создай у узла дерева tn новый дочерний узел t;
             TreeNode t = new TreeNode(Type(shape));
 
-            
             //Если объект o является группой, то:
             if (shape is CGroup group)
             { //Для всех объектов oo из группы o:
@@ -46,12 +49,14 @@ namespace lr4.Observer
                     processNode(t, group.GetShape(i));
                 }
             }
-            if (shape is CArrow arrow)
+            else if (shape is CArrow arrow)
             {
                 processNode(t, arrow.GetShape1());
+
                 processNode(t, arrow.GetShape2());
+
             }
-            if (shape.IsDecorated())
+            else if (shape.IsDecorated())
             {
                 treeView.SelectedNode = t;
                 t.Checked = true;
@@ -61,9 +66,12 @@ namespace lr4.Observer
                 }
                 if (shape is CArrow)
                 {
-                    t.Nodes[0].Checked = true;
-                    t.Nodes[1].Checked = true;
+                    t.Nodes[0].Checked = true;                   
                 }
+            }
+            else if(shape.GetColor()==Color.Black)
+            {
+                t.Checked = true;
             }
 
             tn.Nodes.Add(t);

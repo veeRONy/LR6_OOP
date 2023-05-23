@@ -14,7 +14,7 @@ namespace lr4.Shapes
         public int x, y, a;
         public Graphics g;
         public Pen pen;
-        List<IObserver> observers=new List<IObserver>();
+        public List<IObserver> observers=new List<IObserver>();
 
         abstract public void Draw(frmMain form);
         abstract public bool IsClicked(int X, int Y);
@@ -29,6 +29,10 @@ namespace lr4.Shapes
         public void SetColor(Color color)
         {
             pen.Color = color;
+        }
+        public Color GetColor()
+        {
+            return pen.Color;
         }
         public string ColorCode()
         {
@@ -61,6 +65,7 @@ namespace lr4.Shapes
         }
         public void NotifyEveryone()
         {
+
             foreach(var observer in observers)
                 observer.OnSubjectChanged();
         }

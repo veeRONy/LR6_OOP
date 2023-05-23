@@ -59,7 +59,7 @@ namespace lr4
             else if (da < 0)
                 a += da;
         }
-
+        
         public override void Save(string filename)
         {
             string inf = "C " + x.ToString()

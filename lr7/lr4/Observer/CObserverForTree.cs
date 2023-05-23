@@ -21,21 +21,21 @@ namespace lr4.Observer
             this.observer = observer;
         }
 
-        public void OnSubjectChangedDecorate(TreeNode tn)
+        public void OnSubjectChangedDecorate(TreeNode tn, frmMain form)
         {
             int i = tn.Index;
             if (tn.Parent == null)
                 return;
             if (tn.Parent.Text=="Хранилище:")
             {
-                Decorate(i);
+                Decorate(i,tn, form);
             }
             else
             {
                 while(tn.Parent.Text != "Хранилище:")
                     tn = tn.Parent;
                 i=tn.Index;
-                Decorate(i);
+                Decorate(i,tn,form);
             }
         }
 
@@ -46,26 +46,36 @@ namespace lr4.Observer
             int i = tn.Index;
             if (tn.Parent.Text == "Хранилище:")
             {
-                Undecorate(i);
+                Undecorate(i,tn);
             }
             else
             {
                 while (tn.Parent.Text != "Хранилище:")
+                {
+                    if (tn.Parent.Text == "Стрелка")
+                        break;
                     tn = tn.Parent;
+                }
                 i = tn.Index;
-                Undecorate(i);
+                Undecorate(i,tn);
             }
         }
-        private void Decorate(int i)
+        private void Decorate(int i, TreeNode tn, frmMain form)
         {
             if (shapes.getObject(i) is CGroup group)
             {
-                group.Decorate(observer);
+                group.Decorate(observer, form);
 
             } 
             else if (shapes.getObject(i) is CArrow arrow)
             {
-                arrow.Decorate(observer);
+                if(tn.Index==0)
+                    arrow.Decorate(observer, form);
+                else
+                {
+                    CDecorator decorator = new CDecorator(shapes.getObject(i), observer);
+                    shapes.setObject(i, decorator);
+                }
             }
             else
             {
@@ -74,7 +84,7 @@ namespace lr4.Observer
             }
             shapes.getObject(i).NotifyEveryone();
         }
-        private void Undecorate(int i)
+        private void Undecorate(int i, TreeNode tn)
         {
             if (shapes.getObject(i) is CGroup group)
             {
@@ -82,7 +92,10 @@ namespace lr4.Observer
             }
             else if (shapes.getObject(i) is CArrow arrow)
             {
-                arrow.Undecorate();
+                if(tn.Index==0)
+                    arrow.Undecorate();
+                else
+                    shapes.setObject(i, shapes.getObject(i).GetOriginal());
             }
             else if (shapes.getObject(i) is CDecorator decorator)
             {

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace lr4
 {
@@ -66,17 +67,17 @@ namespace lr4
                 shape.Draw(form);
             }
         }
-        public void Decorate(IObserver observer)
+        public void Decorate(IObserver observer, frmMain form)
         {
             for (int i=0; i<_shapes.Count; i++)
             {
                 if (_shapes[i] is CGroup group)
                 {
-                    group.Decorate(observer);
+                    group.Decorate(observer, form);
                 }
                 else if(_shapes[i] is CArrow arrow)
                 {
-                    arrow.Decorate(observer);
+                    arrow.Decorate(observer,form);
                 }
                 else
                 {
@@ -102,7 +103,21 @@ namespace lr4
             }
         }
 
-       
+        public void DecorateBlackColor()
+        {
+            for (int i = 0; i < _shapes.Count; i++)
+            {
+                _shapes[i].GetOriginal().SetColor(Color.Black);
+            }
+        }
+
+        public void UndecorateRealColor(Color realColor)
+        {
+            for (int i = 0; i < _shapes.Count; i++)
+            {
+                _shapes[i].SetColor(realColor);
+            }
+        }
 
         public override bool IsClicked(int X, int Y)
         {

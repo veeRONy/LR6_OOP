@@ -98,7 +98,19 @@ namespace lr4
                 for (int i = 0; i < shapes.getSize(); ++i)
                     if (shapes.getObject(i).IsDecorated())
                     {
-                        shapes.getObject(i).MoveX(-5, this.Width, this.Height);
+                        if (shapes.getObject(i) is CArrow arrow)
+                        {
+                            if (arrow.IsDecorated())
+                            {
+                                shapes.getObject(i).MoveX(-5, this.Width, this.Height);
+                            }
+                            else
+                            {
+                                arrow.MoveXShape2(-5, this.Width, this.Height);
+                            }
+                        }
+                        else
+                            shapes.getObject(i).MoveX(-5, this.Width, this.Height);
                     }
                 Refresh();
             }
@@ -109,7 +121,19 @@ namespace lr4
                 for (int i = 0; i < shapes.getSize(); ++i)
                     if (shapes.getObject(i).IsDecorated())
                     {
-                        shapes.getObject(i).MoveY(-5, this.Width, this.Height);
+                        if (shapes.getObject(i) is CArrow arrow)
+                        {
+                            if (arrow.IsDecorated())
+                            {
+                                shapes.getObject(i).MoveY(-5, this.Width, this.Height);
+                            }
+                            else
+                            {
+                                arrow.MoveYShape2(-5, this.Width, this.Height);
+                            }
+                        }
+                        else
+                            shapes.getObject(i).MoveY(-5, this.Width, this.Height);
                     }
                 Refresh();
 
@@ -120,7 +144,19 @@ namespace lr4
                 for (int i = 0; i < shapes.getSize(); ++i)
                     if (shapes.getObject(i).IsDecorated())
                     {
-                        shapes.getObject(i).MoveY(5, this.Width, this.Height);
+                        if(shapes.getObject(i) is CArrow arrow)
+                        {
+                            if(arrow.IsDecorated())
+                            {
+                                shapes.getObject(i).MoveY(5, this.Width, this.Height);
+                            }
+                            else
+                            {
+                                arrow.MoveYShape2(5, this.Width, this.Height);
+                            }
+                        }
+                        else
+                            shapes.getObject(i).MoveY(5, this.Width, this.Height);
                     }
                 Refresh();
             }
@@ -130,7 +166,19 @@ namespace lr4
                 for (int i = 0; i < shapes.getSize(); ++i)
                     if (shapes.getObject(i).IsDecorated())
                     {
-                        shapes.getObject(i).MoveX(5, this.Width, this.Height);
+                        if (shapes.getObject(i) is CArrow arrow)
+                        {
+                            if (arrow.IsDecorated())
+                            {
+                                shapes.getObject(i).MoveX(5, this.Width, this.Height);
+                            }
+                            else
+                            {
+                                arrow.MoveXShape2(5, this.Width, this.Height);
+                            }
+                        }
+                        else
+                            shapes.getObject(i).MoveX(5, this.Width, this.Height);
                     }
                 Refresh();
             }
@@ -179,12 +227,23 @@ namespace lr4
                     {
                         if (shapes.getObject(i) is CGroup group)
                         {
-                            group.Decorate(observer);
+                            group.Decorate(observer,this);
                             group.NotifyEveryone();
                         }
                         else if(shapes.getObject(i) is CArrow arrow)
                         {
-                            arrow.Decorate(observer);
+                            if (arrow.GetShape1().IsClicked(e.X, e.Y))
+                            {
+                                arrow.Undecorate();
+                                arrow.Decorate(observer, this);
+                            }
+                            else
+                            {
+                                arrow.Undecorate();
+                                CDecorator decorator = new CDecorator(arrow.GetShape2(), observer);
+                                arrow.SetShape2(decorator);
+
+                            }
                             arrow.NotifyEveryone();
                         }
                         else
@@ -201,6 +260,7 @@ namespace lr4
                 { 
                     shape2 = shapes.getObject(decoratedIndex);
                     DoArrow();
+                    
                 }
                 btnArrowIsClicked = false;
             }
@@ -226,6 +286,7 @@ namespace lr4
                 }
                 else if(shapes.getObject(i) is CArrow arrow)
                 {
+
                     arrow.Undecorate();
                     arrow.NotifyEveryone();
                 }
@@ -241,11 +302,11 @@ namespace lr4
         {
             if (shapes.last() is CGroup group)
             {
-                group.Decorate(observer);
+                group.Decorate(observer,this);
             }
             else if(shapes.last() is CArrow arrow)
             {
-                arrow.Decorate(observer);
+                arrow.Decorate(observer,this);
             }
             else
             {
@@ -394,10 +455,10 @@ namespace lr4
             {
                 if (shapes.last() is CGroup group)
                 {
-                    group.Decorate(observer);
+                    group.Decorate(observer, this);
                 }
                 else if(shapes.last() is CArrow arrow)
-                    arrow.Decorate(observer);
+                    arrow.Decorate(observer, this);
                 else
                 {
                     CDecorator decorator = new CDecorator(shapes.last(), observer);
@@ -412,7 +473,7 @@ namespace lr4
         private void treeView_AfterCheck(object sender, TreeViewEventArgs e)
         {
             if (before == false && e.Node.Checked == true)
-                observerForTree.OnSubjectChangedDecorate(e.Node);
+                observerForTree.OnSubjectChangedDecorate(e.Node,this);
             else if (before == true && e.Node.Checked == false)
                 observerForTree.OnSubjectChangedUndecorate(e.Node);
                 Refresh();
@@ -457,7 +518,7 @@ namespace lr4
             btnArrowIsClicked = false;
             if (CountDecoratedShapes() == 2)
             {
-                CShape arrow = new CArrow(shape1, shape2, observer);
+                CShape arrow = new CArrow(shape1, shape2, observer, color);
                 for (int i = 0; i < shapes.getSize(); ++i)
                 {
                     if (shapes.getObject(i) == shape1 || shapes.getObject(i) == shape2)
@@ -465,8 +526,12 @@ namespace lr4
                         shapes.erase(i);
                         i--;
                     }
-                }                
-                shapes.pushBack(arrow);
+                }
+                CArrow arr = (CArrow)arrow;
+                arr.Undecorate();
+                arr.Decorate(observer, this);
+
+                shapes.pushBack(arr);
                 shapes.last().NotifyEveryone();
             }
         }
