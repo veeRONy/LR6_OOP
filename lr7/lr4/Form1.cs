@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using lr4.Observer;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using System.Security.Cryptography;
 
 namespace lr4
 {
@@ -43,6 +45,7 @@ namespace lr4
             }
             else if (e.KeyCode == Keys.Delete)
             {
+                btnArrowIsClicked = false;
                 for (int i = 0; i < shapes.getSize(); ++i)
                 {
                     // если фмгура/группа выделена, то удаляем ее
@@ -69,15 +72,19 @@ namespace lr4
             }
             else if (e.KeyCode == Keys.Z)
             {
+                btnArrowIsClicked = false;
+                
                 for (int i = 0; i < shapes.getSize(); ++i)
                     if (shapes.getObject(i).IsDecorated())
                     {
                         shapes.getObject(i).ChangeSize(3, this.Width, this.Height);
                     }
+                
                 Refresh();
             }
             else if (e.KeyCode == Keys.X)
             {
+                btnArrowIsClicked = false;
                 for (int i = 0; i < shapes.getSize(); ++i)
                     if (shapes.getObject(i).IsDecorated())
                     {
@@ -87,17 +94,18 @@ namespace lr4
             }
             else if (e.KeyCode == Keys.A)
             {
+                btnArrowIsClicked = false;
                 for (int i = 0; i < shapes.getSize(); ++i)
                     if (shapes.getObject(i).IsDecorated())
                     {
                         shapes.getObject(i).MoveX(-5, this.Width, this.Height);
                     }
-
                 Refresh();
             }
 
             else if (e.KeyCode == Keys.W)
             {
+                btnArrowIsClicked = false;
                 for (int i = 0; i < shapes.getSize(); ++i)
                     if (shapes.getObject(i).IsDecorated())
                     {
@@ -108,16 +116,17 @@ namespace lr4
             }
             else if (e.KeyCode == Keys.S)
             {
+                btnArrowIsClicked = false;
                 for (int i = 0; i < shapes.getSize(); ++i)
                     if (shapes.getObject(i).IsDecorated())
                     {
                         shapes.getObject(i).MoveY(5, this.Width, this.Height);
                     }
-
                 Refresh();
             }
             else if (e.KeyCode == Keys.D)
             {
+                btnArrowIsClicked = false;
                 for (int i = 0; i < shapes.getSize(); ++i)
                     if (shapes.getObject(i).IsDecorated())
                     {
@@ -133,7 +142,8 @@ namespace lr4
         {
             // создание
             if (chbCTRL.Checked==false)
-            {               
+            {
+                btnArrowIsClicked = false;
                 // создаем новую фигуру
                 CShape shape;
                 switch(currShape)
@@ -162,6 +172,7 @@ namespace lr4
             }
             else // выделение
             {
+                int decoratedIndex = 0;
                 // если на фигуру/группу нажали, то декорируем
                 for (int i = 0; i < shapes.getSize(); i++)
                     if (shapes.getObject(i).IsClicked(e.X, e.Y))
@@ -171,6 +182,11 @@ namespace lr4
                             group.Decorate(observer);
                             group.NotifyEveryone();
                         }
+                        else if(shapes.getObject(i) is CArrow arrow)
+                        {
+                            arrow.Decorate(observer);
+                            arrow.NotifyEveryone();
+                        }
                         else
                         {
                             CDecorator decorator = new CDecorator(shapes.getObject(i), observer);
@@ -179,7 +195,14 @@ namespace lr4
                             if (checkBox2.Checked == true)
                                 break;
                         }
+                        decoratedIndex = i;
                     }
+                if (btnArrowIsClicked == true)
+                { 
+                    shape2 = shapes.getObject(decoratedIndex);
+                    DoArrow();
+                }
+                btnArrowIsClicked = false;
             }
             Refresh();
         }
@@ -201,6 +224,11 @@ namespace lr4
                     group.Undecorate();
                     group.NotifyEveryone();
                 }
+                else if(shapes.getObject(i) is CArrow arrow)
+                {
+                    arrow.Undecorate();
+                    arrow.NotifyEveryone();
+                }
                 else if (shapes.getObject(i) is CDecorator decorator)
                 {
                     shapes.setObject(i, decorator.GetOriginal());
@@ -214,6 +242,10 @@ namespace lr4
             if (shapes.last() is CGroup group)
             {
                 group.Decorate(observer);
+            }
+            else if(shapes.last() is CArrow arrow)
+            {
+                arrow.Decorate(observer);
             }
             else
             {
@@ -231,47 +263,56 @@ namespace lr4
 
         private void btnCircle_Click(object sender, EventArgs e)
         {
+            btnArrowIsClicked = false;
             currShape = "Circle";
         }
 
         private void btnRectangle_Click(object sender, EventArgs e)
         {
+            btnArrowIsClicked = false;
             currShape = "Rectangle";
         }
 
         private void btnTriangle_Click(object sender, EventArgs e)
         {
+            btnArrowIsClicked = false;
             currShape = "Triangle";
         }
 
         private void btnRed_Click(object sender, EventArgs e)
         {
+            btnArrowIsClicked = false;
             color = Color.Red;
         }
 
         private void btnGreen_Click(object sender, EventArgs e)
         {
-            color= Color.LimeGreen;
+            btnArrowIsClicked = false;
+            color = Color.LimeGreen;
         }
 
         private void btnBlue_Click(object sender, EventArgs e)
         {
-            color=Color.Blue;
+            btnArrowIsClicked = false;
+            color =Color.Blue;
         }
 
         private void btnPink_Click(object sender, EventArgs e)
         {
-            color=Color.DeepPink;
+            btnArrowIsClicked = false;
+            color =Color.DeepPink;
         }
 
         private void btnYellow_Click(object sender, EventArgs e)
         {
+            btnArrowIsClicked = false;
             color = Color.Yellow;
         }
 
         private void btnGroup_Click(object sender, EventArgs e)
         {
-            if (shapes.getSize() != 0)
+            btnArrowIsClicked = false;
+            if (shapes.getSize() != 0 && CountDecoratedShapes() > 1)
             {
                 CGroup group = new CGroup(observer);
                 for (int i = 0; i < shapes.getSize(); ++i)
@@ -290,6 +331,7 @@ namespace lr4
 
         private void btnUnGroup_Click(object sender, EventArgs e)
         {
+            btnArrowIsClicked = false;
             for (int i=0;i<shapes.getSize(); i++)
             {
                 if (shapes.getObject(i).IsDecorated() && shapes.getObject(i) is CGroup group)
@@ -310,6 +352,13 @@ namespace lr4
                             group.DeleteShape(j);
                             j--;
                         }
+                        else if(group.GetShape(j) is CArrow arrow)
+                        {
+                            arrow.Undecorate();
+                            shapes.pushBack(arrow);
+                            group.DeleteShape(j);
+                            j--;
+                        }
                     }
                     shapes.erase(i);
                     i--;
@@ -324,6 +373,7 @@ namespace lr4
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            btnArrowIsClicked = false;
             int count = shapes.getSize();
             if(count!=0)
             {
@@ -335,6 +385,7 @@ namespace lr4
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
+            btnArrowIsClicked = false;
             CMyShapeArray cMyShapeArray = new CMyShapeArray(shapes, observer);
             cMyShapeArray.LoadShapes(filename);
 
@@ -345,11 +396,12 @@ namespace lr4
                 {
                     group.Decorate(observer);
                 }
+                else if(shapes.last() is CArrow arrow)
+                    arrow.Decorate(observer);
                 else
                 {
                     CDecorator decorator = new CDecorator(shapes.last(), observer);
-                    shapes.popBack();
-                    shapes.pushBack(decorator);
+                    shapes.setObject(shapes.getSize()-1, decorator);
                 }
                 shapes.last().NotifyEveryone();
             }
@@ -363,40 +415,6 @@ namespace lr4
                 observerForTree.OnSubjectChangedDecorate(e.Node);
             else if (before == true && e.Node.Checked == false)
                 observerForTree.OnSubjectChangedUndecorate(e.Node);
-                //int index = e.Node.Index;
-                //if (before == false && e.Node.Checked == true)
-                //{
-                //    if (shapes.getObject(index) is CGroup group)
-                //    {
-                //        group.Decorate(observer);
-                //    }
-                //    else
-                //    {
-                //        CDecorator decorator = new CDecorator(shapes.getObject(index), observer);
-                //        shapes.popBack();
-                //        shapes.pushBack(decorator);
-                //    }
-                //    e.Node.Checked = true;
-                //    Refresh();
-                //}
-                //else if (before == true && e.Node.Checked == false)
-                //{
-                //    for (int i = 0; i < shapes.getSize(); ++i)
-                //    {
-                //        if (shapes.getObject(i) is CGroup group)
-                //        {
-                //            group.Undecorate();
-                //        }
-                //        else if (shapes.getObject(i) is CDecorator decorator)
-                //        {
-                //            shapes.setObject(i, decorator.GetOriginal());
-                //        }
-                //    }
-                //    shapes.last().NotifyEveryone();
-                //    DecorateLastShape();
-                //    e.Node.Checked = false;
-                //    Refresh();
-                //}
                 Refresh();
         }
 
@@ -406,6 +424,51 @@ namespace lr4
                 before = true;
             else
                 before = false;
+        }
+
+        bool btnArrowIsClicked = false;
+        private int CountDecoratedShapes()
+        {
+            int count = 0;
+            for (int i = 0; i < shapes.getSize(); ++i)
+            {
+                if (shapes.getObject(i).IsDecorated())
+                    count++;
+            }
+            return count;
+        }
+        CShape shape1;
+        CShape shape2;
+        private void btnArrow_Click(object sender, EventArgs e)
+        {
+            if (CountDecoratedShapes() == 1)
+            {
+                btnArrowIsClicked = true;
+                // получаем 1 декорированную фигуру
+                for (int i = 0; i < shapes.getSize(); ++i)
+                {
+                    if (shapes.getObject(i).IsDecorated())
+                        shape1 = shapes.getObject(i);
+                }
+            }
+        }
+        private void DoArrow()
+        {
+            btnArrowIsClicked = false;
+            if (CountDecoratedShapes() == 2)
+            {
+                CShape arrow = new CArrow(shape1, shape2, observer);
+                for (int i = 0; i < shapes.getSize(); ++i)
+                {
+                    if (shapes.getObject(i) == shape1 || shapes.getObject(i) == shape2)
+                    {
+                        shapes.erase(i);
+                        i--;
+                    }
+                }                
+                shapes.pushBack(arrow);
+                shapes.last().NotifyEveryone();
+            }
         }
     }
 

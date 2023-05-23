@@ -46,6 +46,11 @@ namespace lr4.Observer
                     processNode(t, group.GetShape(i));
                 }
             }
+            if (shape is CArrow arrow)
+            {
+                processNode(t, arrow.GetShape1());
+                processNode(t, arrow.GetShape2());
+            }
             if (shape.IsDecorated())
             {
                 treeView.SelectedNode = t;
@@ -53,6 +58,11 @@ namespace lr4.Observer
                 if (shape is CGroup)
                 {
                     SelectNodesInGroup(t);
+                }
+                if (shape is CArrow)
+                {
+                    t.Nodes[0].Checked = true;
+                    t.Nodes[1].Checked = true;
                 }
             }
 
@@ -76,6 +86,8 @@ namespace lr4.Observer
                 return "Квадрат";
             else if (shape.GetOriginal().GetType().ToString() == "lr4.Shapes.CTriangle")
                 return "Треугольник";
+            else if (shape.GetOriginal().GetType().ToString() == "lr4.Shapes.CArrow")
+                return "Стрелка";
             else return "Группа:";
         }
 

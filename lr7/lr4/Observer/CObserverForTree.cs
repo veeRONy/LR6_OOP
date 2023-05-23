@@ -24,6 +24,8 @@ namespace lr4.Observer
         public void OnSubjectChangedDecorate(TreeNode tn)
         {
             int i = tn.Index;
+            if (tn.Parent == null)
+                return;
             if (tn.Parent.Text=="Хранилище:")
             {
                 Decorate(i);
@@ -39,6 +41,8 @@ namespace lr4.Observer
 
         public void OnSubjectChangedUndecorate(TreeNode tn)
         {
+            if (tn.Parent == null)
+                return;
             int i = tn.Index;
             if (tn.Parent.Text == "Хранилище:")
             {
@@ -57,6 +61,11 @@ namespace lr4.Observer
             if (shapes.getObject(i) is CGroup group)
             {
                 group.Decorate(observer);
+
+            } 
+            else if (shapes.getObject(i) is CArrow arrow)
+            {
+                arrow.Decorate(observer);
             }
             else
             {
@@ -70,6 +79,10 @@ namespace lr4.Observer
             if (shapes.getObject(i) is CGroup group)
             {
                 group.Undecorate();
+            }
+            else if (shapes.getObject(i) is CArrow arrow)
+            {
+                arrow.Undecorate();
             }
             else if (shapes.getObject(i) is CDecorator decorator)
             {

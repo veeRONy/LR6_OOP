@@ -49,7 +49,7 @@
             this.btnUnGroup = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnLoad = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btnArrow = new System.Windows.Forms.ToolStripButton();
             this.treeView = new System.Windows.Forms.TreeView();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -103,7 +103,7 @@
             this.btnSave,
             this.btnLoad,
             this.toolStripSeparator6,
-            this.toolStripButton1});
+            this.btnArrow});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(984, 39);
@@ -274,15 +274,16 @@
             this.btnLoad.Text = "Загрузить";
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
-            // toolStripButton1
+            // btnArrow
             // 
-            this.toolStripButton1.AutoSize = false;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::lr4.Properties.Resources.right_arrow;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton1.Text = "Стрелка";
+            this.btnArrow.AutoSize = false;
+            this.btnArrow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnArrow.Image = global::lr4.Properties.Resources.right_arrow;
+            this.btnArrow.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnArrow.Name = "btnArrow";
+            this.btnArrow.Size = new System.Drawing.Size(36, 36);
+            this.btnArrow.Text = "Стрелка";
+            this.btnArrow.Click += new System.EventHandler(this.btnArrow_Click);
             // 
             // treeView
             // 
@@ -345,7 +346,7 @@
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripButton btnLoad;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton btnArrow;
         private System.Windows.Forms.TreeView treeView;
     }
 }

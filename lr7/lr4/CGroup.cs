@@ -74,6 +74,10 @@ namespace lr4
                 {
                     group.Decorate(observer);
                 }
+                else if(_shapes[i] is CArrow arrow)
+                {
+                    arrow.Decorate(observer);
+                }
                 else
                 {
                     CDecorator decorator = new CDecorator(_shapes[i], observer);
@@ -88,6 +92,10 @@ namespace lr4
                 if (_shapes[i] is CGroup group)
                 {
                     group.Undecorate();
+                }
+                else if(_shapes[i] is CArrow arrow)
+                {
+                    arrow.Undecorate();
                 }
                 else if (_shapes[i] is CDecorator decorator)
                     _shapes[i] = decorator.GetOriginal();
@@ -131,6 +139,11 @@ namespace lr4
                     if (!group.canMoveX(dx, width))
                         return false;
                 }
+                else if(shape is CArrow arrow)
+                {
+                    if (!arrow.canMoveX(dx, width))
+                        return false;
+                }
                 else if (!shape.canMoveX(dx, width))
                     return false;
             }
@@ -145,6 +158,11 @@ namespace lr4
                     if (!group.canMoveY(dy, height))
                         return false;
                 }
+                else if (shape is CArrow arrow)
+                {
+                    if (!arrow.canMoveY(dy, height))
+                        return false;
+                }
                 else if (!shape.canMoveY(dy, height))
                     return false;
             }
@@ -157,6 +175,11 @@ namespace lr4
                 if (shape is CGroup group)
                 {
                     if (!group.canSizeUp(da, width, height))
+                        return false;
+                }
+                else if (shape is CArrow arrow)
+                {
+                    if (!arrow.canSizeUp(da, width, height))
                         return false;
                 }
                 else if (!shape.canSizeUp(da, width, height))

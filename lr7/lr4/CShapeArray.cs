@@ -36,6 +36,13 @@ namespace lr4
                 {
                     shapes.pushBack(LoadGroup(code, reader, i));
                 }
+                else if (code[0] == 'A')
+                {
+                    CGroup group = new CGroup(observer);
+                    group = LoadGroup(code, reader, i);
+                    CArrow arrow = new CArrow(group.GetShape(0), group.GetShape(1), observer);
+                    shapes.pushBack(arrow);
+                }
                 else
                 {
                     CShape shape = CreateShape(code, reader);
@@ -49,6 +56,8 @@ namespace lr4
             stream.Close();
         }
 
+       
+        
         public CGroup LoadGroup(string code, StreamReader reader, int i)
         {
             CGroup group = new CGroup(observer);
@@ -61,6 +70,12 @@ namespace lr4
                 if (_code[0] == 'G')
                 {
                     group.AddShape(LoadGroup(_code, reader, j));
+                }
+                else if (_code[0] == 'A')
+                {
+                    group = LoadGroup(code, reader, i);
+                    CArrow arrow = new CArrow(group.GetShape(0), group.GetShape(1), observer);
+                    group.AddShape(arrow);
                 }
                 else
                 {
